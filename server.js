@@ -22,8 +22,8 @@ const pool = new Pool({
 
 // Ruta de prueba
 app.get('/', (req, res) => {
-    res.send('API funcionando correctamente');
-});
+    res.send('Esta es la pagina de inicio');
+
 
 // Registro de usuario
 app.post('/register', async (req, res) => {
