@@ -23,7 +23,7 @@ const pool = new Pool({
 // Ruta de prueba
 app.get('/', (req, res) => {
 
-    res.send('INICIO');
+    res.send('Hola Prueba');
 });
 
 // Registro de usuario
