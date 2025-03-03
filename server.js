@@ -22,8 +22,9 @@ const pool = new Pool({
 
 // Ruta de prueba
 app.get('/', (req, res) => {
-    res.send('Esta es la pagina de inicio');
 
+    res.send('INICIO');
+});
 
 // Registro de usuario
 app.post('/register', async (req, res) => {
