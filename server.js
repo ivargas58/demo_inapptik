@@ -22,7 +22,7 @@ const pool = new Pool({
 
 // Ruta de prueba
 app.get('/', (req, res) => {
-    res.send('API funcionando correctamente');
+    res.send('Ahora cada vez que cambie en github se envia al server');
 });
 
 // Registro de usuario
