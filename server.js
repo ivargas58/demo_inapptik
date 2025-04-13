@@ -1,14 +1,13 @@
 import express from 'express';
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Ruta raíz
 app.get('/', (req, res) => {
-    res.send('Hola, Mundo!');
+    res.send('Hola desde Inapptik Server');
 });
 
-// Configuración del puerto
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${PORT}`);
+// Escucha en todas las interfaces (IP pública incluida)
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor corriendo en http://0.0.0.0:${PORT}`);
 });
