@@ -1,10 +1,10 @@
 import express from 'express';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 app.get('/', (req, res) => {
-    res.send('Hola desde Inapptik Server');
+    res.send('Probando');
 });
 
 // Escucha en todas las interfaces (IP pública incluida)
