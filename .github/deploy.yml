@@ -3,7 +3,7 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main  # Este flujo de trabajo se ejecuta solo cuando hay un push a la rama main
+      - main  # Este flujo se ejecuta al hacer push al branch main
 
 jobs:
   deploy:
@@ -18,28 +18,10 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.EC2_KEY }}
 
-    - name: Deploy to EC2
+    - name: Run deploy.sh on EC2
       run: |
-        echo "Desplegando la aplicación a EC2..."
+        echo "🔐 Conectando a EC2 y ejecutando el script de despliegue..."
         ssh -o StrictHostKeyChecking=no ubuntu@18.222.145.75 << 'EOF'
-          # Navega al directorio de tu proyecto
-          cd ~/demo_inapptik || { echo "No se pudo encontrar el directorio"; exit 1; }
-
-          # Actualiza el repositorio desde la rama main
-          git checkout main
-          git pull origin main || { echo "Error al obtener los últimos cambios del repositorio"; exit 1; }
-
-          # Instala las dependencias
-          npm install || { echo "Error al instalar dependencias"; exit 1; }
-
-          # Detiene el proceso actual si está corriendo
-          pm2 stop server || true
-
-          # Inicia la aplicación con PM2
-          pm2 start server.js --name demo_inapptik || { echo "Error al iniciar la aplicación"; exit 1; }
-
-          # Guarda el estado de PM2
-          pm2 save || { echo "Error al guardar el estado de PM2"; exit 1; }
-
-          echo "Despliegue completado exitosamente."
+          chmod +x ~/demo_inapptik/scripts/deploy.sh
+          ~/demo_inapptik/scripts/deploy.sh
         EOF
