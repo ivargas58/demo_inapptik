@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 
 app.get('/', (req, res) => {
-    res.send('Sesupone que ahora funcione ivancito');
+    res.send('Sesupone que ahora funcione ivancito vargas');
 });
 
 // Escucha en todas las interfaces (IP pública incluida)
