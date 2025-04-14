@@ -3,25 +3,25 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main  # Este flujo se ejecuta al hacer push al branch main
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Set up SSH keys
+    - name: Set up SSH access to EC2
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.EC2_KEY }}
 
-    - name: Run deploy.sh on EC2
+    - name: Run deploy script on EC2
       run: |
-        echo "🔐 Conectando a EC2 y ejecutando el script de despliegue..."
         ssh -o StrictHostKeyChecking=no ubuntu@18.222.145.75 << 'EOF'
-          chmod +x ~/demo_inapptik/scripts/deploy.sh
-          ~/demo_inapptik/scripts/deploy.sh
+          cd ~/demo_inapptik || exit 1
+          chmod +x scripts/deploy.sh
+          ./scripts/deploy.sh || exit 1
         EOF
