@@ -17,7 +17,7 @@ then
 fi
 
 # Intentar reiniciar la app si ya está corriendo, si no, iniciarla
-pm2 restart demo_inapptik || pm2 start index.js --name demo_inapptik
+pm2 restart demo_inapptik || pm2 start server.js --name demo_inapptik
 
 # Guardar configuración para reinicio automático tras reboot
 pm2 save
